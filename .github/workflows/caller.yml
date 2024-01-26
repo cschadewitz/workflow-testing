@@ -20,20 +20,11 @@ jobs:
     steps:
       - name: Print
         run: echo ${{ format('["{0}"]', inputs.matrix_input) }}
-  TestArray:
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        input: ${{ format('["{0}"]', inputs.matrix_input) }}
-    steps:
-      - name: Test
-        run: echo ${{ matrix.input }}
   PrintMatrix:
     runs-on: ubuntu-latest
     steps:
       - name: Print
-        run: echo ${{ fromJson(format('[{0}]', inputs.matrix_input)) }}
+        run: echo ${{ fromJson(format('["{0}"]', inputs.matrix_input)) }}
   TestMatrix:
     runs-on: ubuntu-latest
     strategy:
