@@ -6,7 +6,7 @@ on:
       matrix_input:
         description: 'Matrix input (comma-separated)'
         required: true
-        default: 'Hello,World,This,Is,A,Test'
+        default: 'Hello, World, This, Is, A, Test'
         type: string
 
 jobs:
@@ -20,6 +20,15 @@ jobs:
     steps:
       - name: Print
         run: echo ${{ format('["{0}"]', inputs.matrix_input) }}
+  TestArray:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        input: ${{ format('["{0}"]', inputs.matrix_input) }}
+    steps:
+      - name: Test
+        run: echo ${{ matrix.input }}
   PrintMatrix:
     runs-on: ubuntu-latest
     steps:
