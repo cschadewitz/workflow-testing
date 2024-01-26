@@ -10,32 +10,21 @@ on:
         type: string
 
 jobs:
-  PrintString:
+  setup_matrix:
     runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.setup_matrix.outputs.matrix }}
     steps:
-      - name: Print
-        run: echo ${{ inputs.matrix_input }}
-  PrintArray:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Print
-        run: echo ${{ format('[{0}]', inputs.matrix_input) }}
-  PrintFormatedArray:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Print
-        run: echo ${{ join(format('[{0}]', inputs.matrix_input), '","') }}
-  PrintMatrix:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Print
-        run: echo ${{ fromJson(format('["{0}"]', inputs.matrix_input)) }}
-  TestMatrix:
+      - id: setup_matrix
+        uses: ../actions/dynamic-matrix
+        with:
+          matrix_input: ${{ github.event.inputs.matrix_input }}
+  test_matrix:
+    needs: setup_matrix
     runs-on: ubuntu-latest
     strategy:
-      fail-fast: false
       matrix:
-        input: ${{ fromJson(format('[{0}]', inputs.matrix_input)) }}
+        word: ${{ fromJson(needs.setup_matrix.outputs.matrix) }}
     steps:
-      - name: Test
-        run: echo ${{ matrix.input }}
+      - name: Test matrix
+        run: echo ${{ matrix.word }}

@@ -1,0 +1,17 @@
+name: "Dynamic Matrix (Composite)"
+description: "Splits a comma-separated string into a matrix"
+author: "Casey Schadewitz"
+inputs:
+  matrix_input:
+    description: "Matrix input (comma-separated)"
+    required: true
+    type: string
+
+runs:
+  using: "composite"
+  steps:
+    - id: split_matrix
+      name: "Split matrix"
+      run: |
+        input = ${{ inputs.matrix_input }}
+        echo "::set-output name=matrix::[\"${input//,/\",\"}\"]"
