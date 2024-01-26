@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Print
-        run: echo ${{ fromJson(format('[{0}]', inputs.matrix_input)) }}
+        run: echo ${{ format('[{0}]', inputs.matrix_input) }}
   #FormatMatrix:
   #  runs-on: ubuntu-latest
   #  steps:
