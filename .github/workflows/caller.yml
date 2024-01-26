@@ -33,13 +33,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Print
-        run: echo ${{ fromJson(format('["{0}"]', inputs.matrix_input)) }}
+        run: echo ${{ fromJson(format('[{0}]', inputs.matrix_input)) }}
   TestMatrix:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        input: ${{ format('[{0}]',fromJson(format('["{0}"]', inputs.matrix_input))) }}
+        input: ${{ fromJson(format('[{0}]', inputs.matrix_input)) }}
     steps:
       - name: Test
         run: echo ${{ matrix.input }}
