@@ -10,6 +10,21 @@ on:
         type: string
 
 jobs:
+  PrintMatrix:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print
+        run: echo ${{ inputs.matrix_input }}
+  PrintFormattedMatrix:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print
+        run: echo ${{ fromJson(format('[{0}]', inputs.matrix_input)) }}
+  #FormatMatrix:
+  #  runs-on: ubuntu-latest
+  #  steps:
+  #    - name: Format
+  #      run: echo ${{ toJson(split(inputs.matrix_input, ',')) }}
   TestMatrix:
     runs-on: ubuntu-latest
     strategy:
