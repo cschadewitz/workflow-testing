@@ -6,7 +6,7 @@ on:
       matrix_input:
         description: 'Matrix input (comma-separated)'
         required: true
-        default: 'Hello, World, This, Is, A, Test'
+        default: '"Hello", "World", "This", "Is", "A", "Test"'
         type: string
 
 jobs:
