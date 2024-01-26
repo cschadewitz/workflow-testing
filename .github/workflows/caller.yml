@@ -39,7 +39,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        input: ${{ fromJson(format('[{0}]', replace(inputs.matrix_input)) }}
+        input: ${{ fromJson(format('[{0}]', inputs.matrix_input) }}
     steps:
       - name: Test
         run: echo ${{ matrix.input }}
