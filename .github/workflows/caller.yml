@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Print
-        run: echo ${{ format('\{"matrix":[{0}]\}', inputs.matrix_input) }}
+        run: echo ${{ format('{"matrix":["{0}"]}', inputs.matrix_input) }}
   #FormatMatrix:
   #  runs-on: ubuntu-latest
   #  steps:
@@ -30,7 +30,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        input: ${{ fromJson(format('[{0}]', inputs.matrix_input)) }}
+        input: ${{ fromJson(format('["{0}"]', inputs.matrix_input)) }}
     steps:
       - name: Test
         run: echo ${{ matrix.input }}
