@@ -1,5 +1,4 @@
 name: TestMatrixSplitAlternative
-description: 'Test matrix split alternative'
 
 on:
   workflow_dispatch:
