@@ -1,5 +1,5 @@
-name: Test
-d
+name: TestMatrixSplitAlternative
+description: 'Test matrix split alternative'
 
 on:
   workflow_dispatch:
