@@ -19,7 +19,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Print
-        run: echo ${{ format('["{0}"]', inputs.matrix_input) }}
+        run: echo ${{ format('[{0}]', inputs.matrix_input) }}
+  PrintFormatedArray:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print
+        run: echo ${{ join(format('[{0}]', inputs.matrix_input), '","' }}
   PrintMatrix:
     runs-on: ubuntu-latest
     steps:
