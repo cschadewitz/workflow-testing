@@ -1,0 +1,21 @@
+name: Test
+
+on:
+  workflow_dispatch:
+    inputs:
+      matrix_input:
+        description: 'Matrix input (comma-separated)'
+        required: true
+        default: 'Hello, World, This, Is, A, Test'
+        type: string
+
+jobs:
+  TestMatrix:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        input: ${{ fromJson(format("[{0}]", inputs.matrix_input)) }}
+    steps:
+      - name: Test
+        run: echo ${{ matrix.input }}
