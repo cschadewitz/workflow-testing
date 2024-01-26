@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Print
-        run: echo ${{ fromJson(format('["{0}"]', inputs.matrix_input)) }}
+        run: echo ${{ format('[{0}]',fromJson(format('["{0}"]', inputs.matrix_input))) }}
   TestMatrix:
     runs-on: ubuntu-latest
     strategy:
