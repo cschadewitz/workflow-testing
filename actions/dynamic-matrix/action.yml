@@ -14,5 +14,5 @@ runs:
       name: "Split matrix"
       shell: bash
       run: |
-        input = ${{ inputs.matrix_input }}
+        input=${{ inputs.matrix_input }}
         echo "::set-output name=matrix::[\"${input//,/\",\"}\"]"
