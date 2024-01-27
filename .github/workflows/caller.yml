@@ -20,9 +20,9 @@ jobs:
         with:
           ref: ${{ github.event.inputs.ref }}
       - name: list
-        run: ls
+        run: ls -la
       - id: setup_matrix
-        uses: ./.github/workflows/actions/dynamic-matrix@v1
+        uses: .github/workflows/actions/dynamic-matrix@v1
         with:
           matrix_input: ${{ github.event.inputs.matrix_input }}
   test_matrix:
