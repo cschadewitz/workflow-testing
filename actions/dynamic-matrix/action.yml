@@ -15,4 +15,4 @@ runs:
       shell: bash
       run: |
         input=${{ inputs.matrix_input }}
-        echo "::set-output name=matrix::[\"${input//,/\",\"}\"]"
+        echo "matrix=[\"${input//,/\",\"}\"]" >> $GITHUB_OUTPUT
