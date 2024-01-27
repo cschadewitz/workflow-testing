@@ -37,8 +37,7 @@ jobs:
     needs: setup_matrix
     runs-on: ubuntu-latest
     strategy:
-      matrix:
-        word: ${{ fromJson(needs.setup_matrix.outputs.matrix) }}
+      matrix: ${{ fromJson(needs.setup_matrix.outputs.matrix) }}
     steps:
       - name: Test matrix
         run: echo ${{ matrix.word }}
