@@ -16,7 +16,7 @@ jobs:
       matrix: ${{ steps.setup_matrix.outputs.matrix }}
     steps:
       - name: checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           ref: ${{ github.event.inputs.ref }}
       - name: list
@@ -27,6 +27,12 @@ jobs:
         uses: ./actions/dynamic-matrix
         with:
           matrix_input: ${{ github.event.inputs.matrix_input }}
+  print_matrix:
+    needs: setup_matrix
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print matrix
+        run: echo ${{ needs.setup_matrix.outputs.matrix }}
   test_matrix:
     needs: setup_matrix
     runs-on: ubuntu-latest
