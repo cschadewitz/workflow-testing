@@ -10,7 +10,7 @@ inputs:
 outputs:
   matrix:
     description: "Matrix output"
-    value: ${{ steps.split_matrix.outputs.out }}
+    value: ${{ steps.split_matrix.outputs.matrix }}
 
 runs:
   using: "composite"
@@ -20,6 +20,4 @@ runs:
       shell: bash
       run: |
         input=${{ inputs.matrix_input }}
-        echo "matrix=[\"${input//,/\",\"}\"]"
         echo "matrix=[\"${input//,/\",\"}\"]" >> $GITHUB_OUTPUT
-        echo $GITHUB_OUTPUT
