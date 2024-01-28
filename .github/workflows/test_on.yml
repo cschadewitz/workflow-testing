@@ -15,7 +15,7 @@ on:
 
 jobs:
   setup_matrix:
-    runs-on: ${{ github.event.inputs.runs-on }}
+    runs-on: ${{ inputs.runs-on }}
     outputs:
       matrix: ${{ steps.setup_matrix.outputs.matrix_output }}
     steps:
@@ -26,10 +26,10 @@ jobs:
       - id: setup_matrix
         uses: ./actions/dynamic-matrix
         with:
-          matrix_input: ${{ github.event.inputs.test-matrix-input }}
+          matrix_input: ${{ inputs.test-matrix-input }}
   test_matrix:
     needs: setup_matrix
-    runs-on: ${{ github.event.inputs.runs-on }}
+    runs-on: ${{ inputs.runs-on }}
     strategy:
       matrix: 
         word: ${{ fromJson(needs.setup_matrix.outputs.matrix) }}
