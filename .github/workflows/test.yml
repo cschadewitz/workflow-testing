@@ -15,7 +15,7 @@ jobs:
     uses: ./.github/workflows/test_on.yml
     with:
       runs-on: ${{ matrix.runs-on }}
-      matrix_input: 'Hello,World,This,Is,A,Test'
+      test-matrix-input: 'Hello,World,This,Is,A,Test'
   
     
       
