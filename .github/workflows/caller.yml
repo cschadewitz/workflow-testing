@@ -18,7 +18,7 @@ jobs:
   setup_matrix:
     runs-on: ubuntu-latest
     outputs:
-      matrix: ${{ steps.setup_matrix.outputs.matrix }}
+      matrix: ${{ steps.setup_matrix.outputs.matrix_output }}
     steps:
       - name: checkout
         uses: actions/checkout@v4
