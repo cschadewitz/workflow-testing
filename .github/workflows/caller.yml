@@ -10,6 +10,11 @@ on:
         type: string
 
 jobs:
+  print_input:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print input
+        run: echo ${{ github.event.inputs.matrix_input }}
   setup_matrix:
     runs-on: ubuntu-latest
     outputs:
@@ -19,19 +24,15 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.inputs.ref }}
-      - name: list
-        run: |
-          pwd
-          ls -la
       - id: setup_matrix
         uses: ./actions/dynamic-matrix
         with:
           matrix_input: ${{ github.event.inputs.matrix_input }}
-  print_matrix:
+  print_output:
     needs: setup_matrix
     runs-on: ubuntu-latest
     steps:
-      - name: Print matrix
+      - name: Print output
         run: echo ${{ needs.setup_matrix.outputs.matrix }}
   test_matrix:
     needs: setup_matrix
