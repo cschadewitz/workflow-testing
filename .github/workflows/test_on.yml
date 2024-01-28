@@ -1,7 +1,7 @@
 name: Test On (inputs.runs-on)
 
 on:
-  workflow_dispatch:
+  workflow_call:
     inputs:
       runs-on:
         description: 'Runs on'
