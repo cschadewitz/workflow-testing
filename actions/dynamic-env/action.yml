@@ -1,0 +1,21 @@
+name: "Dynamic Environment (Composite)"
+description: >
+  Takes Json string, parses it, and sets environment variables
+  for use in subsequent steps in a job
+author: "Casey Schadewitz"
+inputs:
+  env_input:
+    description: "Environment Input (Json)"
+    required: true
+    type: string
+runs:
+  using: "composite"
+  steps:
+    - id: set_env
+      name: "Set Environment"
+      shell: bash
+      run: |
+        for key in $(echo $json_string | jq -r 'keys[]'); do
+          value=$(echo $json_string | jq -r .${key})
+          export $key="$value"
+        done

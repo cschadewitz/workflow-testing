@@ -12,6 +12,11 @@ on:
         required: true
         default: 'Hello,World,This,Is,A,Test'
         type: string
+      test-env-input:
+        description: 'Test env input (comma-separated)'
+        required: true
+        default: '{"hello":"world","this":"is","a":"test"}'
+        type: string
 
 jobs:
   setup_matrix:
@@ -36,3 +41,23 @@ jobs:
     steps:
       - name: Test matrix
         run: echo ${{ matrix.word }}
+  test_env:
+    needs: setup_matrix
+    runs-on: ${{ inputs.runs-on }}
+    steps:
+      - id: test_env
+        name: Test env
+        uses: ./actions/dynamic-env
+        with:
+          env_input: ${{ inputs.test-env-input }}
+      - id: test_env_output
+        name: Test env output
+        run: |
+          for key in $(echo $json_string | jq -r 'keys[]'); do
+              value=$(printenv $key)
+              if [ ! -z "$value" ]; then
+                  echo "$key: $value"
+              else
+                  echo "Environment variable '$key' is not set."
+              fi
+          done
