@@ -20,8 +20,3 @@ runs:
           value=$(echo $input | jq -r .${key})
           echo $key="$value" >> $GITHUB_ENV
         done
-
-        for key in $(echo $input | jq -r 'keys[]'); do
-          value=$(echo $input | jq -r .${key})
-          export $key="$value"
-        done
