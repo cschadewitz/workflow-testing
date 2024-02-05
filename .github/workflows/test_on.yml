@@ -58,7 +58,7 @@ jobs:
         name: Test env output
         shell: bash
         run: |
-          for key in $(echo $json_string | jq -r 'keys[]'); do
+          for key in $(echo ${{inputs.test-env-input}} | jq -r 'keys[]'); do
               value=$(printenv $key)
               if [ ! -z "$value" ]; then
                   echo "$key: $value"
