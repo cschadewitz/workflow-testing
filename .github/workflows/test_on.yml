@@ -42,7 +42,6 @@ jobs:
       - name: Test matrix
         run: echo ${{ matrix.word }}
   test_env:
-    needs: setup_matrix
     runs-on: ${{ inputs.runs-on }}
     steps:
       - name: checkout
@@ -58,7 +57,8 @@ jobs:
         name: Test env output
         shell: bash
         run: |
-          for key in $(echo ${{inputs.test-env-input}} | jq -r 'keys[]'); do
+          input='${{ inputs.test-env-input }}'
+          for key in $(echo $input | jq -r 'keys[]'); do
               value=$(printenv $key)
               if [ ! -z "$value" ]; then
                   echo "$key: $value"
