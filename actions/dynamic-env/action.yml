@@ -17,5 +17,5 @@ runs:
       run: |
         for key in $(echo $json_string | jq -r 'keys[]'); do
           value=$(echo $json_string | jq -r .${key})
-          export $key="$value"
+          echo $key="$value" >> $GITHUB_ENV
         done
