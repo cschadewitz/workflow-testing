@@ -56,6 +56,7 @@ jobs:
           env_input: ${{ inputs.test-env-input }}
       - id: test_env_output
         name: Test env output
+        shell: bash
         run: |
           for key in $(echo $json_string | jq -r 'keys[]'); do
               value=$(printenv $key)
@@ -65,3 +66,4 @@ jobs:
                   echo "Environment variable '$key' is not set."
               fi
           done
+          printenv
