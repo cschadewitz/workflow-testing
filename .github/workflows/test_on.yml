@@ -45,6 +45,10 @@ jobs:
     needs: setup_matrix
     runs-on: ${{ inputs.runs-on }}
     steps:
+      - name: checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.ref }}
       - id: test_env
         name: Test env
         uses: ./actions/dynamic-env
