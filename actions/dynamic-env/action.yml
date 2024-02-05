@@ -15,8 +15,9 @@ runs:
       name: "Set Environment"
       shell: bash
       run: |
-        for key in $(echo '${{inputs.env_input}}' | jq -r 'keys[]'); do
-          value=$(echo ${{inputs.env_input}} | jq -r .${key})
+        input='${{ inputs.env_input }}'
+        for key in $(echo $input | jq -r 'keys[]'); do
+          value=$(echo $input | jq -r .${key})
           echo $key="$value" >> $GITHUB_ENV
         done
 
