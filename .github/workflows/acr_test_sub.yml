@@ -9,6 +9,12 @@ on:
         required: true
 
 jobs:
+  print:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print
+        run: |
+          echo ${{ secrets.ACR_USERNAME }}
   test:
     runs-on: ubuntu-latest
     container:
