@@ -36,6 +36,16 @@ jobs:
         run: |
           echo "ACR_USERNAME=$(az keyvault secret show --vault-name ${{ inputs.kv_name }} --name GithubToAzureUsername --query value -o tsv)" >> $GITHUB_OUTPUT
           echo "ACR_PASSWORD=$(az keyvault secret show --vault-name ${{ inputs.kv_name }} --name GithubToAzurePassword --query value -o tsv)" >> $GITHUB_OUTPUT
+      - name: test username
+        run: echo ${{ steps.get_acr.outputs.ACR_USERNAME }}
+
+  testusernamejob:
+    runs-on: ubuntu-latest
+    needs: login
+    steps:
+      - name: Test
+        run: |
+          echo ${{ needs.login.outputs.ACR_USERNAME }}
 
   test:
     runs-on: ubuntu-latest
