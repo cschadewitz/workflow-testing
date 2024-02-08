@@ -1,4 +1,4 @@
-name: ACR Test Caller
+name: ACRTestCaller
 
 on:
   workflow_dispatch:

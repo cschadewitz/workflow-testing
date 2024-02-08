@@ -1,4 +1,4 @@
-name: KV ACR Test
+name: KVACRTest
 
 on: 
   workflow_call:
