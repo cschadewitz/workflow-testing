@@ -35,7 +35,7 @@ jobs:
         id: get_acr
         run: |
           echo "ACR_USERNAME=$(az keyvault secret show --vault-name ${{ inputs.kv_name }} --name GithubToAzureUsername --query value -o tsv)" >> $GITHUB_OUTPUT
-          echo "ACR_OTHER_STUFF=$(az keyvault secret show --vault-name ${{ inputs.kv_name }} --name GithubToAzurePassword --query value -o tsv)" >> $GITHUB_OUTPUT
+          echo "ACR_OTHER_STUFF=$(az keyvault secret show --vault-name ${{ inputs.kv_name }} --name GithubToAzureOtherStuff --query value -o tsv)" >> $GITHUB_OUTPUT
       - name: test username
         run: echo ${{ steps.get_acr.outputs.ACR_USERNAME }}
 
