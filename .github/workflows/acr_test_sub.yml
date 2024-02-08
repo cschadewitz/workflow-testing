@@ -2,14 +2,16 @@ name: ACRTESTSUBTASK
 
 on:
   workflow_call:
-    secrets:
+    inputs:
       ACR_USERNAME:
         required: true
+        type: string
+    secrets:
       ACR_PASSWORD:
         required: true
 
 env:
-  ACR_USERNAME: ${{ secrets.ACR_USERNAME }}
+  ACR_USERNAME: ${{ inputs.ACR_USERNAME }}
   ACR_PASSWORD: ${{ secrets.ACR_PASSWORD }}
 
 jobs:
@@ -18,7 +20,7 @@ jobs:
     steps:
       - name: Print
         run: |
-          echo ${{ secrets.ACR_USERNAME }}
+          echo ${{ env.ACR_USERNAME }}
   test:
     runs-on: ubuntu-latest
     container:

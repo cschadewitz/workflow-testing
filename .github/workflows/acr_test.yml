@@ -50,8 +50,9 @@ jobs:
   test_sub:
     needs: login
     uses: ./.github/workflows/acr_test_sub.yml
-    secrets:
+    with:      
       ACR_USERNAME: ${{ needs.login.outputs.ACR_USERNAME }}
+    secrets:
       ACR_PASSWORD: ${{ needs.login.outputs.ACR_PASSWORD }}
 
   test:
