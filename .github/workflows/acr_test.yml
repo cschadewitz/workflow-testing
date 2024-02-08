@@ -61,7 +61,7 @@ jobs:
     container:
       image: githubtoacr.azurecr.io/ubuntu:latest
       credentials:
-        username: 'GithubToAzure'
+        username: ${{ needs.login.outputs.ACR_USERNAME }}
         password: ${{ needs.login.outputs.ACR_PASSWORD }}
     steps:
       - name: Test

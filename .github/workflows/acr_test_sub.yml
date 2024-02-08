@@ -26,8 +26,8 @@ jobs:
     container:
       image: githubtoacr.azurecr.io/ubuntu:latest
       credentials:
-        username: ${{ env.ACR_USERNAME }}
-        password: ${{ env.ACR_PASSWORD }}
+        username: ${{ inputs.ACR_USERNAME }}
+        password: ${{ secrets.ACR_PASSWORD }}
     steps:
       - name: Test
         run: |
