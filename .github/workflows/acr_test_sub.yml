@@ -8,6 +8,10 @@ on:
       ACR_PASSWORD:
         required: true
 
+env:
+  ACR_USERNAME: ${{ secrets.ACR_USERNAME }}
+  ACR_PASSWORD: ${{ secrets.ACR_PASSWORD }}
+
 jobs:
   print:
     runs-on: ubuntu-latest
@@ -20,8 +24,8 @@ jobs:
     container:
       image: githubtoacr.azurecr.io/ubuntu:latest
       credentials:
-        username: ${{ secrets.ACR_USERNAME }}
-        password: ${{ secrets.ACR_PASSWORD }}
+        username: ${{ env.ACR_USERNAME }}
+        password: ${{ env.ACR_PASSWORD }}
     steps:
       - name: Test
         run: |
