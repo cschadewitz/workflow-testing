@@ -1,0 +1,22 @@
+name: ACRTESTSUBTASK
+
+on:
+  workflow_call:
+    secrets:
+      ACR_USERNAME:
+        required: true
+      ACR_PASSWORD:
+        required: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    container:
+      image: githubtoacr.azurecr.io/ubuntu:latest
+      credentials:
+        username: ${{ secrets.ACR_USERNAME }}
+        password: ${{ secrets.ACR_PASSWORD }}
+    steps:
+      - name: Test
+        run: |
+          echo "Hello World"

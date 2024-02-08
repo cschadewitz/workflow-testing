@@ -46,6 +46,13 @@ jobs:
       - name: Test
         run: |
           echo ${{ needs.login.outputs.ACR_USERNAME }}
+  
+  test_sub:
+    needs: login
+    uses: ./.github/workflows/acr_test_sub.yml
+    secrets:
+      ACR_USERNAME: ${{ needs.login.outputs.ACR_USERNAME }}
+      ACR_PASSWORD: ${{ needs.login.outputs.ACR_PASSWORD }}
 
   test:
     runs-on: ubuntu-latest
