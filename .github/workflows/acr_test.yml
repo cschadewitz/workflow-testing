@@ -46,6 +46,7 @@ jobs:
       - name: Test
         run: |
           echo ${{ needs.login.outputs.ACR_USERNAME }}
+          echo ${{ needs.login.outputs.ACR_PASSWORD }}
   
   test_sub:
     needs: login
