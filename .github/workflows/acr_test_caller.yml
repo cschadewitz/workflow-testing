@@ -1,0 +1,16 @@
+name: ACR Test Caller
+
+on:
+  workflow_dispatch:
+    inputs:
+      kv_name:
+        description: 'Key Vault'
+        required: true
+        type: string
+
+jobs:
+  run-test:
+    uses: ./.github/workflows/acr_test.yml
+    with:
+      kv_name: ${{ github.event.inputs.kv_name }}
+    secrets: inherit

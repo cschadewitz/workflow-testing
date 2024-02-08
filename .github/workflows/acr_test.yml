@@ -1,0 +1,51 @@
+name: KV ACR Test
+
+on: 
+  workflow_call:
+    inputs: 
+      kv_name: 
+        description: 'Key Vault'
+        required: true
+        type: string
+    secrets:
+      AZURE_CLIENT_ID:
+        description: 'Azure Client ID'
+      AZURE_TENANT_ID:
+        description: 'Azure Tenant ID'
+      AZURE_SUBSCRIPTION_ID:
+        description: 'Azure Subscription ID'
+
+jobs:
+  login:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+    outputs:
+      ACR_USERNAME: ${{ steps.get_acr.outputs.ACR_USERNAME }}
+      ACR_PASSWORD: ${{ steps.get_acr.outputs.ACR_PASSWORD }}
+    steps:
+      - name: Login to az cli
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      
+      - name: Get ACR
+        id: get_acr
+        run: |
+          echo "ACR_USERNAME=$(az keyvault secret show --vault-name ${{ inputs.kv_name }} --name GithubToAzureUsername --query value -o tsv)" >> $GITHUB_OUTPUT
+          echo "ACR_PASSWORD=$(az keyvault secret show --vault-name ${{ inputs.kv_name }} --name GithubToAzurePassword --query value -o tsv)" >> $GITHUB_OUTPUT
+
+  test:
+    runs-on: ubuntu-latest
+    needs: login
+    container:
+      image: githubtoacr.azurecr.io/ubuntu:latest
+      credentials:
+        username: ${{ needs.login.outputs.ACR_USERNAME }}
+        password: ${{ needs.login.outputs.ACR_PASSWORD }}
+    steps:
+      - name: Test
+        run: |
+          echo "Hello World"
