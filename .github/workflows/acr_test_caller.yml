@@ -11,6 +11,8 @@ on:
 jobs:
   run-test:
     uses: ./.github/workflows/acr_test.yml
+    permissions:
+      id-token: write
     with:
       kv_name: ${{ github.event.inputs.kv_name }}
     secrets: inherit
