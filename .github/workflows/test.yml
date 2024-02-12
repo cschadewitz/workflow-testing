@@ -17,6 +17,3 @@ jobs:
       runs-on: ${{ matrix.runs-on }}
       test-matrix-input: 'Hello,World,This,Is,A,Test'
       test-env-input: '{"hello":"world","this":"is","a":"test"}'
-  
-    
-      
