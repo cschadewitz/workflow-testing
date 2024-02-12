@@ -1,0 +1,33 @@
+name: CrossRepoTestReusableWorkflow
+
+on:
+  workflow_call:
+    secrets:
+      az-client-id:
+        description: 'Azure Client ID'
+        required: true
+      az-tenant-id:
+        description: 'Azure Tenant ID'
+        required: true
+      az-subscription-id:
+        description: 'Azure Subscription ID'
+        required: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo
+        run: echo "In reusable workflow"}"
+  
+  kv_test_login:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+    steps:
+      - name: Login to az cli
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.az-client-id }}
+          tenant-id: ${{ secrets.az-tenant-id }}
+          subscription-id: ${{ secrets.az-subscription-id }}
