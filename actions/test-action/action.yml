@@ -1,0 +1,21 @@
+name: "Test Action"
+
+on:
+  workflow_call:
+    inputs:
+      test:
+        description: "Test Input"
+        required: true
+        type: string
+
+runs:
+  using: "composite"
+  steps:
+    - id: test
+      name: "Test"
+      shell: bash
+      run: |
+        echo "Test: hello = ${{ env.hello}}
+        echo "Test: this = ${{ env.this}}
+        echo "Test: a = ${{ env.a}}
+```
