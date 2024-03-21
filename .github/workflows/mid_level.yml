@@ -1,0 +1,29 @@
+name: Mid Level
+
+on:
+    workflow_call:
+
+jobs:
+    start:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Start
+              run: echo "Starting"
+        
+    matrix:
+        uses: ./.github/workflows/bottom_level.yml
+        strategy:
+            matrix:
+                name: ["1", "2", "3"]
+            fail-fast: true
+        with:
+            name: ${{ matrix.name }}
+
+    end:
+        runs-on: ubuntu-latest
+        needs: matrix
+        steps:
+            - name: End
+              run: |
+                echo "Matrix status: ${{ needs.matrix.result }}"
+                echo "job status: ${{ job.status }}"

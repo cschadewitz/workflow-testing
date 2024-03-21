@@ -1,0 +1,18 @@
+name: Top Level
+
+on:
+    workflow_dispatch:
+
+
+jobs:
+    reusable-workflow-job:
+        uses: ./.github/workflows/mid_level.yml
+    
+    check-state:
+        runs-on: ubuntu-latest
+        needs: reusable-workflow-job
+        steps:
+            - name: Check state
+              run: |
+                echo "Reusable Job State: ${{ needs.reusable-workflow-job.result }}"
+                echo "job status: ${{ job.status }}"
