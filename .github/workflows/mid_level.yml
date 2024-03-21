@@ -19,6 +19,14 @@ jobs:
         with:
             name: ${{ matrix.name }}
 
+    check:
+        needs: matrix
+        if: ${{ needs.matrix.result == 'failure' || needs.matrix.result == 'cancelled' }}
+        runs-on: ubuntu-latest
+        steps:
+            - name: Check
+              run: exit 1
+
     end:
         if: always()
         runs-on: ubuntu-latest
