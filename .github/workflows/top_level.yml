@@ -14,5 +14,5 @@ jobs:
         steps:
             - name: Check state
               run: |
-                echo "Reusable Job State: ${{ needs.reusable-workflow-job.result }}"
-                echo "job status: ${{ job.status }}"
+                echo "Reusable Job State: ${{ needs.reusable-workflow-job.result }}" >> $GITHUB_STEP_SUMMARY
+                echo "job status: ${{ job.status }}" >> $GITHUB_STEP_SUMMARY

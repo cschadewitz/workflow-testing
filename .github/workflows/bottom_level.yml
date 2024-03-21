@@ -20,12 +20,14 @@ jobs:
         runs-on: ubuntu-latest
         if: ${{ inputs.name == '1' }}
         steps:
-            - run: echo "This job should fail"
+            - run: |
+                echo "This job should fail"
+                exit 1
     
     status-check:
         runs-on: ubuntu-latest
         needs: [greet, should-fail]
         if: always()
         steps:
-            - run: echo "${{ job.status }}"
+            - run: echo "${{ job.status }}" >> $GITHUB_STEP_SUMMARY
               
