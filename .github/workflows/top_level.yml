@@ -9,6 +9,7 @@ jobs:
         uses: ./.github/workflows/mid_level.yml
     
     check-state:
+        if: always()
         runs-on: ubuntu-latest
         needs: reusable-workflow-job
         steps:
